@@ -1,0 +1,67 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.128.0/containers/javascript-node-10
+{
+	"name": "Akamai Dev",
+	//"image": "anirban1c/akamai-cli-hub",
+	//"basePath": "/Users/anirban/apps/git",
+	"dockerFile": "Dockerfile.hub",
+	//"workspaceFolder": "/cli-onboard",
+	//"workspaceMount": "source=/mnt/sde1/apps",
+
+	"workspaceFolder": "/workspace",
+	// point to the abs path on remote
+	//"workspaceMount": "source=/home/anirban/akamai-devtools,target=/workspace,type=bind,consistency=delegated",
+	// put in a unique vol name or leave it
+	// wtf is with vscode to provide a rnd !!
+	"mounts": [
+		//"source=/mnt/sde1/goss/remote-vscode-containers/java,target=/workspace/java,type=volume",
+		"source=unique-vol-name-here-15,target=/root/.vscode-server/extensions,type=volume",
+		// And/or for VS Code Insiders
+		"source=unique-vol-name-here-insiders-15,target=/root/.vscode-server-insiders/extensions,type=volume",
+		
+		// abs source path on remote to mount creds
+		//"source=/mnt/sde2/apps/git/akamai_utils/cli-onboard/bin/.edgerc,target=/root/.edgerc,type=bind,consistency=delegated",
+	],
+
+	"containerEnv": {
+		"GO111MODULE": "auto",
+		"GOPATH": "${localWorkspaceFolder}/src",
+		"GOBIN" :  "${localWorkspaceFolder}/bin", 
+	},
+	
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/sh"
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"hashicorp.terraform",
+		"ms-azuretools.vscode-azureterraform",
+		"ms-vscode.azurecli",
+		"ms-azuretools.vscode-docker",
+		"dbaeumer.vscode-eslint",
+		"golang.Go",		
+		"mads-hartmann.bash-ide-vscode",
+		"rogalmic.bash-debug",
+		"ms-python.python",
+
+	],
+
+	//load up env vars 
+	//"runArgs": ["--env-file","/home/anirban/.container_env"]
+	
+
+	// "mounts": [
+	// 	"source=/Users/anirban/apps/git/akamai_utils/cli-onboard/bin/.edgerc,target=/root/.edgerc,type=volume",
+	// 	"source=/Users/anirban/apps/git/akamai_utils/cli-onboard/bin/.netstorage,target=/root/.akamai-cli/.netstorage/auth,type=volume"		
+	// ],
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "yarn install",
+
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "node"
+}
